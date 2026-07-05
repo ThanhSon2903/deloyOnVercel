@@ -16,12 +16,11 @@ function App() {
 
         <Route path="/verify-otp" element={<VerifyOtp />}/>
         <Route path="/dashboard" element={
-      
             <Dashboard />
-          
         }/>
 
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        
       </Routes>
     </BrowserRouter>
   )
