@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getDashboardSummary } from "../service/dashboardService";
 import { Layout, Row, Col, Card, Badge, Button, Space } from "antd";
 import { Avatar, Dropdown } from "antd";
-import {UserOutlined,LogoutOutlined } from "@ant-design/icons";
+import {ThunderboltOutlined,UserOutlined,LogoutOutlined } from "@ant-design/icons";
 import StatsCard from "../components/dashboard/StatsCard";
 import LiveMonitoring from "../components/dashboard/LiveMonitoring";
 import PostureStatus from "../components/dashboard/PostureStatus";
