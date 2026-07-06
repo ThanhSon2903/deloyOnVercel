@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { getDashboardSummary } from "../service/dashboardService";
 import { Layout, Row, Col, Card, Badge, Button, Space } from "antd";
-import { BellOutlined, SettingOutlined, SyncOutlined, ThunderboltOutlined } from "@ant-design/icons";
+import { Avatar, Dropdown } from "antd";
+import {UserOutlined,LogoutOutlined } from "@ant-design/icons";
 import StatsCard from "../components/dashboard/StatsCard";
 import LiveMonitoring from "../components/dashboard/LiveMonitoring";
 import PostureStatus from "../components/dashboard/PostureStatus";
@@ -37,17 +38,33 @@ function Dashboard() {
     }
   };
 
-  // Hàm callback kích hoạt trạng thái khi bấm Start bên component con
+
   const handleStartTracking = (sessionId) => {
     setCurrentSessionId(sessionId);
     setIsLive(true);
   };
 
-  // Hàm callback ngắt trạng thái khi bấm End bên component con
   const handleEndTracking = () => {
     setIsLive(false);
     setCurrentSessionId(null);
   };
+
+  const logoutMenu = {
+    items: [
+      {
+        key: "logout",
+        icon: <LogoutOutlined />,
+        label: "Logout",
+      },
+    ],
+    onClick: ({ key }) => {
+      if (key === "logout") {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+      }
+    },
+  }
+
 
   return (
     <Layout className="dashboard-layout">
@@ -61,7 +78,7 @@ function Dashboard() {
               {isLive ? `Session #${currentSessionId} Active` : "No Active Session"}
             </span>
           </div>
-          <div className="header-right">
+          {/* <div className="header-right">
             <Space size="large">
               <Button 
                 type="text" 
@@ -73,6 +90,22 @@ function Dashboard() {
               </Badge>
               <Button type="text" icon={<SettingOutlined className="navbar-icon" />} />
             </Space>
+          </div> */}
+          <div className="header-right">
+              <Dropdown
+                menu={logoutMenu}
+                trigger={["hover"]}
+                placement="bottomRight"
+              >
+              <Avatar
+                size={38}
+                icon={<UserOutlined />}
+                style={{
+                  background: "#6c63ff",
+                  cursor: "pointer",
+                }}
+              />
+            </Dropdown>
           </div>
         </Header>
 
