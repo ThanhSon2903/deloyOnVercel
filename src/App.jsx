@@ -5,6 +5,7 @@ import Register from "./pages/register"
 import VerifyOtp from "./pages/verifyOtp"
 import Dashboard from "./pages/dashboard"
 import "./App.css"
+import Session from "./pages/Session"
 
 function App() {
   return (
@@ -12,15 +13,11 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/register" element={<Register/>}></Route>
-       
-
         <Route path="/verify-otp" element={<VerifyOtp />}/>
-        <Route path="/dashboard" element={
-            <Dashboard />
-        }/>
-
+        <Route path="/dashboard" element={<Dashboard />}/>
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        
+        <Route path="/sessions" element = {<Session/>}/>
+
       </Routes>
     </BrowserRouter>
   )
