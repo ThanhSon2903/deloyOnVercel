@@ -78,19 +78,6 @@ function Dashboard() {
               {isLive ? `Session #${currentSessionId} Active` : "No Active Session"}
             </span>
           </div>
-          {/* <div className="header-right">
-            <Space size="large">
-              <Button 
-                type="text" 
-                icon={<SyncOutlined spin={loading} className="navbar-icon" />} 
-                onClick={loadDashboard} 
-              />
-              <Badge count={dashboard.totalNotifications} overflowCount={99}>
-                <Button type="text" icon={<BellOutlined className="navbar-icon" />} />
-              </Badge>
-              <Button type="text" icon={<SettingOutlined className="navbar-icon" />} />
-            </Space>
-          </div> */}
           <div className="header-right">
               <Dropdown
                 menu={logoutMenu}
@@ -101,7 +88,7 @@ function Dashboard() {
                 size={38}
                 icon={<UserOutlined />}
                 style={{
-                  background: "#6c63ff",
+                  backgroundColor: "#14b8a6",
                   cursor: "pointer",
                 }}
               />
