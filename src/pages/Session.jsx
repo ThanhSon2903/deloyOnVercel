@@ -13,7 +13,7 @@ function Session(){
             const res = await axiosClient.get(
                 "http://localhost:8080/api/sessions/list-sessions",
                 {
-                    header: {
+                    headers: {
                         Authorization: `Bearer ${token}`
                     }
                 }
@@ -21,7 +21,7 @@ function Session(){
             setSession(res.data.data);
         }
         catch (error) {
-            console.log(err);
+            console.log(error);
         }
     }
     return (
@@ -39,7 +39,7 @@ function Session(){
                 </thead>
 
                 <tbody>
-                    {sessions.map(session => (
+                    {session.map(session => (
                         <tr key={session.sessionId}>
 
                             <td>{session.sessionId}</td>
