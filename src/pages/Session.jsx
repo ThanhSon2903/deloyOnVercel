@@ -4,6 +4,9 @@ import axiosClient from "../api/axiosClient";
 function Session() {
     const [sessions, setSessions] = useState([]);
 
+    const [searchTerm, setSearchTerm] = useState("");
+    const [sortConfig, setSortConfig] = useState({key: "startTime",direction: "desc"})
+
     useEffect(() => {
         fetchFunction();
     }, []);
@@ -43,6 +46,36 @@ function Session() {
         }
     }
 
+    const handleSort = (key) => {
+        let direction = "asc";
+        if (sortConfig.key === key && sortConfig.direction === "asc"){
+            direction = "desc";
+        }
+        setSortConfig({ key, direction });
+    }
+
+    const processedSessions = [...sessions]
+        .filter((item) => 
+            item.sessionId.toString().toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .sort((a, b) => {
+            if (!a[sortConfig.key] || !b[sortConfig.key]) return 0;
+            
+            const dateA = new Date(a[sortConfig.key]).getTime();
+            const dateB = new Date(b[sortConfig.key]).getTime();
+
+            if (sortConfig.direction === "asc") {
+                return dateA - dateB; // Tăng dần
+            } else {
+                return dateB - dateA; // Giảm dần
+            }
+        });
+
+    const getSortIcon = (key) => {
+        if (sortConfig.key !== key) return "↕️";
+        return sortConfig.direction === "asc" ? "🔼" : "🔽";
+    };
+
     return (
         <div className="min-h-screen bg-slate-950 p-4 md:p-8 font-sans antialiased text-slate-200">
             <div className="max-w-7xl mx-auto">
@@ -58,7 +91,6 @@ function Session() {
                         </p>
                     </div>
 
-                    {/* Total Card - Dark Mode style */}
                     <div className="bg-slate-900 border border-slate-800 rounded-2xl px-6 py-4 shadow-xl flex items-center gap-4">
                         <div className="p-3 bg-blue-950/60 text-blue-400 border border-blue-900/50 rounded-xl font-semibold">
                             📊 Total
@@ -70,15 +102,49 @@ function Session() {
                     </div>
                 </div>
 
-                {/* Table Card - Dark Mode style */}
+                {/* Thanh Công Cụ: Tìm kiếm & Trạng thái lọc */}
+                <div className="mb-4 flex flex-col md:flex-row gap-4 items-center justify-between">
+                    <div className="relative w-full md:w-72">
+                        <input
+                            type="text"
+                            placeholder="🔍 Tìm kiếm theo số ID..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                        />
+                    </div>
+                    
+                    {searchTerm && (
+                        <div className="text-xs text-slate-400 self-start md:self-center">
+                            Tìm thấy <span className="text-blue-400 font-bold">{processedSessions.length}</span> kết quả phù hợp.
+                        </div>
+                    )}
+                </div>
+
+                {/* Table Card */}
                 <div className="bg-slate-900 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden">
                     <div className="overflow-x-auto">
                         <table className="w-full border-collapse text-left text-sm text-slate-300">
                             <thead className="bg-slate-950/60 border-b border-slate-800 text-xs font-semibold uppercase tracking-wider text-slate-400">
                                 <tr>
                                     <th className="px-6 py-4 w-20">🆔 ID</th>
-                                    <th className="px-6 py-4">🕒 Start Time</th>
-                                    <th className="px-6 py-4">🏁 End Time</th>
+                                    
+                                    {/* Thêm chức năng click sắp xếp cho cột Start Time */}
+                                    <th 
+                                        className="px-6 py-4 cursor-pointer hover:text-white select-none transition-colors"
+                                        onClick={() => handleSort("startTime")}
+                                    >
+                                        🕒 Start Time <span className="ml-1 text-[10px]">{getSortIcon("startTime")}</span>
+                                    </th>
+                                    
+                                    {/* Thêm chức năng click sắp xếp cho cột End Time */}
+                                    <th 
+                                        className="px-6 py-4 cursor-pointer hover:text-white select-none transition-colors"
+                                        onClick={() => handleSort("endTime")}
+                                    >
+                                        🏁 End Time <span className="ml-1 text-[10px]">{getSortIcon("endTime")}</span>
+                                    </th>
+                                    
                                     <th className="px-6 py-4 text-center">⏱ Duration</th>
                                     <th className="px-6 py-4 text-center">⚠️ Bad Posture</th>
                                     <th className="px-6 py-4 text-center w-32">Action</th>
@@ -86,7 +152,7 @@ function Session() {
                             </thead>
 
                             <tbody className="divide-y divide-slate-800">
-                                {sessions.length === 0 ? (
+                                {processedSessions.length === 0 ? (
                                     <tr>
                                         <td colSpan={6} className="py-12 text-center text-slate-500">
                                             <div className="flex flex-col items-center justify-center gap-2">
@@ -96,7 +162,8 @@ function Session() {
                                         </td>
                                     </tr>
                                 ) : (
-                                    sessions.map((item) => (
+                        
+                                    processedSessions.map((item) => (
                                         <tr 
                                             key={item.sessionId} 
                                             className="hover:bg-slate-800/40 transition-colors"
