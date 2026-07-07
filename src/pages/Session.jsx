@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import axiosClient from "../api/axiosClient";
 
-function Session(){
-    const [sessions,setSessions] = useState([]);
+function Session() {
+    const [sessions, setSessions] = useState([]);
+
     useEffect(() => {
         fetchFunction();
-    },[]);
+    }, []);
 
+    
     const formatDate = (date) => {
-        return new Date(date).toLocaleString("vi-VN",{
+        if (!date) return "-";
+        return new Date(date).toLocaleString("vi-VN", {
             day: "2-digit",
             month: "2-digit",
             year: "numeric",
@@ -16,6 +19,13 @@ function Session(){
             minute: "2-digit"
         });
     }
+
+    
+    const formatDuration = (duration) => {
+        if (!duration) return "0 giây";
+        return duration.replace(/([a-zA-ZÀ-ỹ]+)(\d+)/g, "$1 $2");
+    }
+
     const fetchFunction = async () => {
         try {
             const token = localStorage.getItem("token");
@@ -28,162 +38,108 @@ function Session(){
                 }
             );
             setSessions(res.data.data);
-        }
-        catch (error) {
+        } catch (error) {
             console.log(error);
         }
     }
-    return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 p-8">
 
+    return (
+        <div className="min-h-screen bg-slate-950 p-4 md:p-8 font-sans antialiased text-slate-200">
             <div className="max-w-7xl mx-auto">
 
-            {/* Header */}
-            <div className="flex items-center justify-between mb-8">
-                <div>
-                <h1 className="text-4xl font-bold text-gray-800">
-                    📋 Session History
-                </h1>
+                {/* Header Section */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+                    <div>
+                        <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
+                            <span>📋</span> Session History
+                        </h1>
+                        <p className="text-sm text-slate-400 mt-1">
+                            Review and manage your posture monitoring sessions.
+                        </p>
+                    </div>
 
-                <p className="text-gray-500 mt-2">
-                    Review and manage your posture monitoring sessions.
-                </p>
+                    {/* Total Card - Dark Mode style */}
+                    <div className="bg-slate-900 border border-slate-800 rounded-2xl px-6 py-4 shadow-xl flex items-center gap-4">
+                        <div className="p-3 bg-blue-950/60 text-blue-400 border border-blue-900/50 rounded-xl font-semibold">
+                            📊 Total
+                        </div>
+                        <div>
+                            <p className="text-xs text-slate-500 font-medium uppercase tracking-wider">Total Sessions</p>
+                            <h2 className="text-2xl font-bold text-white">{sessions.length}</h2>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl px-8 py-5 shadow-xl">
-                <p className="text-sm opacity-90">
-                    Total Sessions
-                </p>
+                {/* Table Card - Dark Mode style */}
+                <div className="bg-slate-900 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden">
+                    <div className="overflow-x-auto">
+                        <table className="w-full border-collapse text-left text-sm text-slate-300">
+                            <thead className="bg-slate-950/60 border-b border-slate-800 text-xs font-semibold uppercase tracking-wider text-slate-400">
+                                <tr>
+                                    <th className="px-6 py-4 w-20">🆔 ID</th>
+                                    <th className="px-6 py-4">🕒 Start Time</th>
+                                    <th className="px-6 py-4">🏁 End Time</th>
+                                    <th className="px-6 py-4 text-center">⏱ Duration</th>
+                                    <th className="px-6 py-4 text-center">⚠️ Bad Posture</th>
+                                    <th className="px-6 py-4 text-center w-32">Action</th>
+                                </tr>
+                            </thead>
 
-                <h2 className="text-4xl font-bold">
-                    {sessions.length}
-                </h2>
+                            <tbody className="divide-y divide-slate-800">
+                                {sessions.length === 0 ? (
+                                    <tr>
+                                        <td colSpan={6} className="py-12 text-center text-slate-500">
+                                            <div className="flex flex-col items-center justify-center gap-2">
+                                                <span className="text-3xl">📂</span>
+                                                <p>No session history found.</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ) : (
+                                    sessions.map((item) => (
+                                        <tr 
+                                            key={item.sessionId} 
+                                            className="hover:bg-slate-800/40 transition-colors"
+                                        >
+                                            <td className="px-6 py-4 font-semibold text-blue-400">
+                                                #{item.sessionId}
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap">
+                                                {formatDate(item.startTime)}
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap">
+                                                {formatDate(item.endTime)}
+                                            </td>
+                                            <td className="px-6 py-4 text-center whitespace-nowrap">
+                                                <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-emerald-950/60 text-emerald-400 border border-emerald-900/40">
+                                                    {formatDuration(item.duration)}
+                                                </span>
+                                            </td>
+                                            <td className="px-6 py-4 text-center whitespace-nowrap">
+                                                <span className={`inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium border ${
+                                                    item.badPostureDuration > 0 
+                                                        ? 'bg-red-950/60 text-red-400 border-red-900/40' 
+                                                        : 'bg-slate-800/60 text-slate-400 border-slate-700/50'
+                                                }`}>
+                                                    {item.badPostureDuration}
+                                                </span>
+                                            </td>
+                                            <td className="px-6 py-4 text-center">
+                                                <button className="inline-flex items-center justify-center font-medium text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-2 rounded-lg transition-colors shadow-lg shadow-blue-900/20 whitespace-nowrap">
+                                                    👁 View Details
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-
-            {/* Table Card */}
-            <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
-
-                <table className="w-full">
-
-                <thead className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
-
-                    <tr>
-
-                    <th className="px-6 py-4 text-left">🆔 ID</th>
-
-                    <th className="px-6 py-4 text-left">🕒 Start</th>
-
-                    <th className="px-6 py-4 text-left">🏁 End</th>
-
-                    <th className="px-6 py-4 text-center">⏱ Duration</th>
-
-                    <th className="px-6 py-4 text-center">⚠ Bad Posture</th>
-
-                    <th className="px-6 py-4 text-center">Action</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    {sessions.length === 0 ? (
-
-                    <tr>
-
-                        <td
-                        colSpan={6}
-                        className="py-16 text-center text-gray-400 text-lg"
-                        >
-                        📂 No session history found.
-                        </td>
-
-                    </tr>
-
-                    ) : (
-
-                    sessions.map((item, index) => (
-
-                        <tr
-                        key={item.sessionId}
-                        className={`
-                            border-b
-                            transition-all
-                            duration-300
-                            hover:bg-blue-50
-                            hover:scale-[1.005]
-                            ${index % 2 === 0 ? "bg-white" : "bg-slate-50"}
-                        `}
-                        >
-
-                        <td className="px-6 py-5 font-bold text-blue-600">
-                            #{item.sessionId}
-                        </td>
-
-                        <td className="px-6 py-5 text-gray-700">
-                            {formatDate(item.startTime)}
-                        </td>
-
-                        <td className="px-6 py-5 text-gray-700">
-                            {formatDate(item.endTime)}
-                        </td>
-
-                        <td className="px-6 py-5 text-center">
-
-                            <span className="inline-block bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full font-semibold">
-                            {item.duration}
-                            </span>
-
-                        </td>
-
-                        <td className="px-6 py-5 text-center">
-
-                            <span className="inline-block bg-red-100 text-red-600 px-4 py-2 rounded-full font-semibold">
-                            {item.badPostureDuration}
-                            </span>
-
-                        </td>
-
-                        <td className="px-6 py-5 text-center">
-
-                            <button
-                            className="
-                                bg-gradient-to-r
-                                from-blue-600
-                                to-indigo-600
-                                hover:from-blue-700
-                                hover:to-indigo-700
-                                text-white
-                                px-5
-                                py-2.5
-                                rounded-xl
-                                shadow-lg
-                                transition-all
-                                duration-300
-                                hover:scale-105
-                            "
-                            >
-                            👁 View Details
-                            </button>
-
-                        </td>
-
-                        </tr>
-
-                    ))
-
-                    )}
-
-                </tbody>
-
-                </table>
 
             </div>
-
-            </div>
-
         </div>
     );
 }
+
 export default Session;
