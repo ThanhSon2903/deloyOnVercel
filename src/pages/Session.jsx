@@ -7,6 +7,15 @@ function Session(){
         fetchFunction();
     },[]);
 
+    const formatDate = (date) => {
+        return new Date(date).toLocaleString("vi-VN",{
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        });
+    }
     const fetchFunction = async () => {
         try {
             const token = localStorage.getItem("token");
@@ -25,43 +34,105 @@ function Session(){
         }
     }
     return (
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Start</th>
-                        <th>End</th>
-                        <th>Duration</th>
-                        <th>Bad Posture</th>
-                        <th></th>
-                    </tr>
-                </thead>
+        <div className="p-8">
+            <div className="bg-white rounded-2xl shadow-lg p-6">
 
-                <tbody>
-                    {session.map(session => (
-                        <tr key={session.sessionId}>
+                <div className="mb-6">
+                    <h2 className="text-3xl font-bold text-gray-800">
+                        📋 Session History
+                    </h2>
 
-                            <td>{session.sessionId}</td>
+                    <p className="text-gray-500 mt-1">
+                        Review and manage your posture monitoring sessions.
+                    </p>
+                </div>
 
-                            <td>{session.startTime}</td>
+                <div className="overflow-x-auto">
 
-                            <td>{session.endTime}</td>
+                    <table className="w-full border-collapse">
 
-                            <td>{session.duration}</td>
+                        <thead>
+                            <tr className="bg-blue-50 text-gray-700 uppercase text-sm">
+                                <th className="px-6 py-4 text-left">ID</th>
+                                <th className="px-6 py-4 text-left">Start</th>
+                                <th className="px-6 py-4 text-left">End</th>
+                                <th className="px-6 py-4 text-left">Duration</th>
+                                <th className="px-6 py-4 text-left">Bad Posture</th>
+                                <th className="px-6 py-4 text-center">Action</th>
+                            </tr>
+                        </thead>
 
-                            <td>{session.badPostureDuration}</td>
+                        <tbody>
 
-                            <td>
-                                <button>
-                                    View
-                                </button>
+                            {sessions.map((item, index) => (
 
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+                                <tr
+                                    key={item.sessionId}
+                                    className={`
+                                        transition
+                                        duration-300
+                                        hover:bg-blue-50
+                                        hover:shadow-md
+                                        ${index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                                    `}
+                                >
+
+                                    <td className="px-6 py-5 font-semibold text-blue-600">
+                                        #{item.sessionId}
+                                    </td>
+
+                                    <td className="px-6 py-5">
+                                        {formatDate(item.startTime)}
+                                    </td>
+
+                                    <td className="px-6 py-5">
+                                        {formatDate(item.endTime)}
+                                    </td>
+
+                                    <td className="px-6 py-5">
+                                        <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
+                                            {item.duration}
+                                        </span>
+                                    </td>
+
+                                    <td className="px-6 py-5">
+                                        <span className="bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm">
+                                            {item.badPostureDuration}
+                                        </span>
+                                    </td>
+
+                                    <td className="px-6 py-5 text-center">
+
+                                        <button
+                                            className="
+                                                bg-blue-600
+                                                hover:bg-blue-700
+                                                hover:scale-105
+                                                transition
+                                                duration-300
+                                                text-white
+                                                px-5
+                                                py-2
+                                                rounded-lg
+                                                shadow-md
+                                            "
+                                        >
+                                            View Details
+                                        </button>
+
+                                    </td>
+
+                                </tr>
+
+                            ))}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
         </div>
     )
 }
