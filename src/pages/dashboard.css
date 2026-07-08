@@ -1,23 +1,16 @@
-/* ==========================================================================
-   1. TỔNG QUAN LAYOUT (Tone Deep Space Tech)
-   ========================================================================== */
-.dashboard-layout, 
+/* dashboard.css - Phiên bản Fix lệch Layout */
+
+/* 1. Đồng bộ màu nền Layout và Sidebar */
+.dashboard-layout {
+  min-height: 100vh;
+  background-color: #0b0f19 !important;
+}
+
 .main-layout {
   background-color: #0b0f19 !important;
-  min-height: 100vh;
 }
 
-/* Khu vực nội dung chính */
-.dashboard-content {
-  padding: 24px !important;
-  max-width: 1600px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-/* ==========================================================================
-   2. THANH HEADER / NAVBAR
-   ========================================================================== */
+/* Thanh Navbar */
 .dashboard-navbar {
   background-color: #111827 !important;
   border-bottom: 1px solid #1f2937;
@@ -28,12 +21,6 @@
   height: 64px;
 }
 
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
 .dashboard-title {
   color: #ffffff !important;
   font-size: 20px !important;
@@ -41,168 +28,85 @@
   margin: 0 !important;
 }
 
-/* Icons trên Navbar */
-.navbar-icon {
-  font-size: 18px;
-  color: #a3a3a3;
-  transition: color 0.2s;
-  cursor: pointer;
-}
-
-.navbar-icon:hover {
-  color: #ffffff;
-}
-
-/* Tag hiển thị Session active */
 .session-tag {
   background-color: rgba(20, 184, 166, 0.1);
   border: 1px solid rgba(20, 184, 166, 0.3);
   color: #14b8a6;
-  padding: 4px 12px;
+  padding: 4px 10px;
   border-radius: 6px;
   font-size: 13px;
-  font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  margin-left: 16px;
 }
 
-/* ==========================================================================
-   3. TIÊU ĐỀ PHÂN KHU (SECTION HEADERS)
-   ========================================================================== */
+/* 2. Cố định chiều cao bằng nhau cho 2 khối Live Monitoring */
+.live-monitoring-row {
+  display: flex !important;
+  align-items: stretch; /* Ép các cột bằng chiều cao nhau */
+}
+
+.live-monitoring-row .ant-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Khối bên trái (Card chứa LiveMonitoring) */
+.card-dark.custom-glow {
+  background-color: #111827 !important;
+  border: 1px solid #1f2937 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4) !important;
+  flex: 1; /* Chiếm hết chiều cao cột */
+  display: flex;
+  flex-direction: column;
+}
+
+.card-dark.custom-glow .ant-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Căn giữa nội dung bên trong */
+  padding: 20px !important;
+}
+
+/* Khối bên phải (Component PostureStatus) */
+/* Bạn vào file PostureStatus gắn thêm className hoặc chỉnh css thẻ bọc ngoài cùng của nó */
+.posture-status-card, 
+.live-monitoring-row .ant-col:last-child > div {
+  background-color: #111827 !important;
+  border: 1px solid #1f2937 !important;
+  border-radius: 12px !important;
+  padding: 24px !important;
+  height: 100% !important; /* Buộc cao bằng khối bên trái */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Giãn cách đều các thông số bên trong */
+}
+
+/* Fix text và tiêu đề */
+.section-title {
+  color: #f3f4f6 !important;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
 .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 24px 0 16px 0;
 }
 
-.section-title {
-  color: #f3f4f6 !important;
-  font-size: 18px !important;
-  font-weight: 600;
-  margin: 0 !important;
-}
-
-/* Đèn nháy Live Streaming */
-.live-indicator {
-  color: #14b8a6;
-  font-size: 13px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(20, 184, 166, 0.05);
-  padding: 4px 12px;
-  border-radius: 20px;
-  border: 1px solid rgba(20, 184, 166, 0.15);
-}
-
-.dot {
-  width: 8px;
-  height: 8px;
-  background-color: #14b8a6;
-  border-radius: 50%;
-  display: inline-block;
-  box-shadow: 0 0 8px #14b8a6;
-}
-
-/* ==========================================================================
-   4. CẤU TRÚC CARD & ÉP ĐỒNG BỘ CHIỀU CAO (Ant Design Fix)
-   ========================================================================== */
-.stats-row, 
-.live-monitoring-row {
-  display: flex !important;
-  flex-wrap: wrap;
-}
-
-.stats-row .ant-col, 
-.live-monitoring-row .ant-col {
-  display: flex !important;
-  flex-direction: column;
-}
-
-/* Đảm bảo toàn bộ component con lấp đầy 100% chiều cao của cột */
-.stats-row .ant-col > div,
-.stats-row .ant-card,
-.live-monitoring-row .ant-col > div,
-.live-monitoring-row .card-dark,
-.live-monitoring-row .posture-status-card {
-  height: 100% !important;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Reset Padding cho ruột Card Antd */
-.stats-row .ant-card-body,
-.live-monitoring-row .card-dark .ant-card-body {
-  padding: 20px !important;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Thiết kế hộp Card Dark nguyên bản */
-.card-dark {
-  background-color: #111827 !important;
-  border: 1px solid #1f2937 !important;
-  border-radius: 12px !important;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(20, 184, 166, 0.02) !important;
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Hiệu ứng viền phát sáng Cyan khi hover vào */
-.custom-glow:hover {
-  border-color: #14b8a6 !important;
-  box-shadow: 0 0 20px rgba(20, 184, 166, 0.15), 0 4px 24px rgba(0, 0, 0, 0.4) !important;
-}
-
-/* ==========================================================================
-   5. ANIMATIONS & EFFECTS
-   ========================================================================== */
-.blink-icon {
-  animation: blink 1.5s infinite;
-}
-
-.visual-blink {
-  animation: pulse-cyan 2s infinite;
-}
-
-@keyframes pulse-cyan {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(20, 184, 166, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(20, 184, 166, 0); }
+/* Hiệu ứng nháy */
+.blink-icon, .dot.visual-blink {
+  animation: blink 1.2s infinite;
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 0.4; }
+  0% { opacity: 0.4; }
   50% { opacity: 1; }
-}
-
-/* ==========================================================================
-   6. CUSTOM ANT DESIGN ELEMENTS
-   ========================================================================== */
-.ant-dropdown-menu {
-  background-color: #111827 !important;
-  border: 1px solid #1f2937 !important;
-}
-
-.ant-dropdown-menu-item {
-  color: #d1d5db !important;
-}
-
-.ant-dropdown-menu-item:hover {
-  background-color: #1f2937 !important;
-  color: #ffffff !important;
-}
-
-/* ==========================================================================
-   7. RESPONSIVE
-   ========================================================================== */
-@media (max-width: 768px) {
-  .dashboard-navbar { padding: 0 16px !important; }
-  .dashboard-content { padding: 16px !important; }
-  .dashboard-title { font-size: 18px !important; }
+  100% { opacity: 0.4; }
 }
