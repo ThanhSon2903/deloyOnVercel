@@ -5,6 +5,7 @@ function Session() {
     const [sessions, setSessions] = useState([]);
 
     const [searchTerm, setSearchTerm] = useState("");
+    const [filterDate,setFilterDate] = useState("");
     const [sortConfig, setSortConfig] = useState({key: "startTime",direction: "desc"})
 
     useEffect(() => {
@@ -55,9 +56,13 @@ function Session() {
     }
 
     const processedSessions = [...sessions]
+
+        //Loc theo id
         .filter((item) => 
             item.sessionId.toString().toLowerCase().includes(searchTerm.toLowerCase())
         )
+
+        //Sắp xếp theo ngày tăng dần hoặc giảm dần
         .sort((a, b) => {
             if (!a[sortConfig.key] || !b[sortConfig.key]) return 0;
             
@@ -69,7 +74,14 @@ function Session() {
             } else {
                 return dateB - dateA; // Giảm dần
             }
-        });
+        })
+
+        // Lọc theo ngày
+        .filter((item) => {
+            if(!filterDate) return true; //neu rong thi hien thi tat ca ngay
+            const sessionDate = item.startTime.split("T")[0];
+            return sessionDate === filterDate;
+        })
 
     const getSortIcon = (key) => {
         if (sortConfig.key !== key) return "↕️";
@@ -83,11 +95,11 @@ function Session() {
                 {/* Header Section */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
                     <div>
-                        <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
-                            <span>📋</span> Session History
-                        </h1>
+                        <h3 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
+                            <span>📋</span> Tracking session history
+                        </h3>
                         <p className="text-sm text-slate-400 mt-1">
-                            Review and manage your posture monitoring sessions.
+                            Review and manage your posture monotoring sessions
                         </p>
                     </div>
 
@@ -102,24 +114,51 @@ function Session() {
                     </div>
                 </div>
 
+
+
                 {/* Thanh Công Cụ: Tìm kiếm & Trạng thái lọc */}
                 <div className="mb-4 flex flex-col md:flex-row gap-4 items-center justify-between">
-                    <div className="relative w-full md:w-72">
-                        <input
-                            type="text"
-                            placeholder="🔍 Tìm kiếm theo số ID..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
-                        />
+                    <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto items-stretch sm:items-center">
+                        {/* Tìm kiếm theo ID */}
+                        <div className="relative w-full sm:w-64">
+                            <input
+                                type="text"
+                                placeholder="🔍 Tìm kiếm theo số ID..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                            />
+                        </div>
+
+                        {/* Ô chọn lọc theo ngày */}
+                        <div className="relative w-full sm:w-48">
+                            <input
+                                type="date"
+                                value={filterDate}
+                                onChange={(e) => setFilterDate(e.target.value)}
+                                className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500 transition-colors colored-calendar"
+                            />
+                            {/* Nút xóa nhanh bộ lọc ngày nếu có chọn */}
+                            {filterDate && (
+                                <button 
+                                    onClick={() => setFilterDate("")}
+                                    className="absolute right-8 top-1/2 -translate-y-1/2 text-xs text-slate-500 hover:text-slate-300"
+                                    title="Xóa lọc ngày"
+                                >
+                                    ✕
+                                </button>
+                            )}
+                        </div>
                     </div>
                     
-                    {searchTerm && (
+                    {/* Thống kê kết quả tìm kiếm/lọc */}
+                    {(searchTerm || filterDate) && (
                         <div className="text-xs text-slate-400 self-start md:self-center">
                             Tìm thấy <span className="text-blue-400 font-bold">{processedSessions.length}</span> kết quả phù hợp.
                         </div>
                     )}
                 </div>
+
 
                 {/* Table Card */}
                 <div className="bg-slate-900 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden">
@@ -161,7 +200,8 @@ function Session() {
                                             </div>
                                         </td>
                                     </tr>
-                                ) : (
+                                ) 
+                                : (
                         
                                     processedSessions.map((item) => (
                                         <tr 
