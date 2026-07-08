@@ -25,7 +25,9 @@ body,
 /* ===========================
    Navbar
 =========================== */
-
+.header-icon:hover {
+  color: #ffffff !important;
+}
 .dashboard-navbar {
     height: 64px;
     background: #111827 !important;

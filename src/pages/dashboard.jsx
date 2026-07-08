@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import { getDashboardSummary } from "../service/dashboardService";
-import { Layout, Row, Col, Card, Badge, Button, Space } from "antd";
+import { Layout, Row, Col, Card } from "antd";
 import { Avatar, Dropdown } from "antd";
-import {ThunderboltOutlined,UserOutlined,LogoutOutlined } from "@ant-design/icons";
+import {
+  ThunderboltOutlined,
+  UserOutlined,
+  LogoutOutlined,
+  ReloadOutlined,       // Thêm icon Refresh
+  BellOutlined,         // Thêm icon Notification
+  SettingOutlined       // Thêm icon Settings
+} from "@ant-design/icons";
 import StatsCard from "../components/dashboard/StatsCard";
 import LiveMonitoring from "../components/dashboard/LiveMonitoring";
 import PostureStatus from "../components/dashboard/PostureStatus";
@@ -12,8 +19,8 @@ import "./dashboard.css";
 const { Header, Content } = Layout;
 
 function Dashboard() {
-  const [currentSessionId, setCurrentSessionId] = useState(null); // Ban đầu chưa có session id
-  const [isLive, setIsLive] = useState(false); // Mặc định chưa bấm start thì chưa detect
+  const [currentSessionId, setCurrentSessionId] = useState(null);
+  const [isLive, setIsLive] = useState(false);
   const [loading, setLoading] = useState(false);
   const [dashboard, setDashboard] = useState({
     totalSessions: 0,
@@ -37,7 +44,6 @@ function Dashboard() {
       setLoading(false);
     }
   };
-
 
   const handleStartTracking = (sessionId) => {
     setCurrentSessionId(sessionId);
@@ -63,8 +69,7 @@ function Dashboard() {
         window.location.href = "/login";
       }
     },
-  }
-
+  };
 
   return (
     <Layout className="dashboard-layout">
@@ -78,12 +83,28 @@ function Dashboard() {
               {isLive ? `Session #${currentSessionId} Active` : "No Active Session"}
             </span>
           </div>
-          <div className="header-right">
-              <Dropdown
-                menu={logoutMenu}
-                trigger={["hover"]}
-                placement="bottomRight"
-              >
+          
+          {/* Cập nhật khu vực góc phải bổ sung các icon chức năng */}
+          <div className="header-right" style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+            <ReloadOutlined 
+              className="header-icon" 
+              onClick={loadDashboard} 
+              style={{ fontSize: "18px", color: "#9ca3af", cursor: "pointer" }} 
+            />
+            <BellOutlined 
+              className="header-icon" 
+              style={{ fontSize: "18px", color: "#9ca3af", cursor: "pointer" }} 
+            />
+            <SettingOutlined 
+              className="header-icon" 
+              style={{ fontSize: "18px", color: "#9ca3af", cursor: "pointer" }} 
+            />
+            
+            <Dropdown
+              menu={logoutMenu}
+              trigger={["hover"]}
+              placement="bottomRight"
+            >
               <Avatar
                 size={38}
                 icon={<UserOutlined />}
@@ -126,7 +147,6 @@ function Dashboard() {
           <Row gutter={[16, 16]} className="live-monitoring-row">
             <Col xs={24} lg={16}>
               <Card className="card-dark custom-glow" bordered={false}>
-                {/* Truyền các sự kiện điều khiển xuống LiveMonitoring */}
                 <LiveMonitoring 
                   isTracking={isLive} 
                   sessionId={currentSessionId} 
@@ -136,7 +156,6 @@ function Dashboard() {
               </Card>
             </Col>
             <Col xs={24} lg={8}>
-              {/* Nhận biến đồng bộ trực tiếp từ cha phát ra */}
               <PostureStatus sessionId={currentSessionId} isTracking={isLive} />
             </Col>
           </Row>
