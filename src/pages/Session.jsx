@@ -70,7 +70,7 @@ function Session() {
         try {
             const token = localStorage.getItem("token");
             const res = await axiosClient.get(
-                `http://localhost:8080/api/session/view-detail/${sessionId}`,
+                `http://localhost:8080/api/sessions/view-detail/${sessionId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
