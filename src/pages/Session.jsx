@@ -348,7 +348,7 @@ function Session() {
                                                     {formatAngle(posture.torsoAngle)}
                                                 </td>
                                                 <td className="px-4 py-3 text-center font-mono text-slate-300 text-xs">
-                                                    {formatAngle(posture.shoulderRatio)}
+                                                    {formatAngle(posture.shouterRatio)}
                                                 </td>
                                                
                                             </tr>
