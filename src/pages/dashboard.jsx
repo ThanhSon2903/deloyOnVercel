@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axiosClient from "../api/axiosClient";
 
-function Session() {
+function Dashboard() {
     const [sessions, setSessions] = useState([]);
 
     const [searchTerm, setSearchTerm] = useState("");
@@ -223,4 +223,4 @@ function Session() {
     );
 }
 
-export default Session;
+export default Dashboard;
