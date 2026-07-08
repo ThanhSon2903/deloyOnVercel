@@ -192,16 +192,16 @@ function Session() {
                         <table className="w-full border-collapse text-left text-sm text-slate-300">
                             <thead className="bg-slate-950/60 border-b border-slate-800 text-xs font-semibold uppercase tracking-wider text-slate-400">
                                 <tr>
-                                    <th className="px-6 py-4 w-20">🆔 ID</th>
+                                    <th className="px-6 py-4 w-20">ID</th>
                                     <th className="px-6 py-4 cursor-pointer hover:text-white select-none transition-colors" onClick={() => handleSort("startTime")}>
-                                        🕒 Start Time <span className="ml-1 text-[10px]">{getSortIcon("startTime")}</span>
+                                        Start Time <span className="ml-1 text-[10px]">{getSortIcon("startTime")}</span>
                                     </th>
                                     <th className="px-6 py-4 cursor-pointer hover:text-white select-none transition-colors" onClick={() => handleSort("endTime")}>
-                                        🏁 End Time <span className="ml-1 text-[10px]">{getSortIcon("endTime")}</span>
+                                        End Time <span className="ml-1 text-[10px]">{getSortIcon("endTime")}</span>
                                     </th>
-                                    <th className="px-6 py-4 text-center">⏱ Duration</th>
-                                    <th className="px-6 py-4 text-center">⚠️ Bad Posture</th>
-                                    <th className="px-6 py-4 text-center w-32">Action</th>
+                                    <th className="px-6 py-4 text-center">Duration</th>
+                                    <th className="px-6 py-4 text-center">Bad Posture</th>
+                                    <th className="px-6 py-4 text-center w-32">View</th>
                                 </tr>
                             </thead>
 
@@ -317,12 +317,12 @@ function Session() {
                             <table className="w-full border-collapse text-left text-sm text-slate-300">
                                 <thead className="bg-slate-950/80 text-xs font-semibold uppercase text-slate-400 border-b border-slate-800">
                                     <tr>
-                                        <th className="px-4 py-3 w-16 text-center">Snapshot ID</th>
-                                        <th className="px-4 py-3">🕒 Thời Gian Ghi Nhận</th>
-                                        <th className="px-4 py-3">🧍 Trạng Thái Tư Thế</th>
-                                        <th className="px-4 py-3 text-center">📐 Góc Cổ (Neck)</th>
-                                        <th className="px-4 py-3 text-center">📐 Góc Lưng (Torso)</th>
-                                        <th className="px-4 py-3 text-center">📊 Tỷ Lệ Vai</th>
+                                        <th className="px-4 py-3 w-16 text-center">ID</th>
+                                        <th className="px-4 py-3">Thời Gian Ghi Nhận</th>
+                                        <th className="px-4 py-3">Trạng Thái Tư Thế</th>
+                                        <th className="px-4 py-3 text-center">Góc Cổ</th>
+                                        <th className="px-4 py-3 text-center">Góc Lưng</th>
+                                        <th className="px-4 py-3 text-center">Góc Vai</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-slate-800/50">
@@ -347,9 +347,10 @@ function Session() {
                                                 <td className="px-4 py-3 text-center font-mono text-slate-300 text-xs">
                                                     {formatAngle(posture.torsoAngle)}
                                                 </td>
-                                                <td className="px-4 py-3 text-center font-mono text-slate-400 text-xs">
-                                                    {posture.shoulderRatio ? Number(posture.shoulderRatio).toFixed(3) : "-"}
+                                                <td className="px-4 py-3 text-center font-mono text-slate-300 text-xs">
+                                                    {formatAngle(posture.shoulderRatio)}
                                                 </td>
+                                               
                                             </tr>
                                         ))
                                     ) : (
