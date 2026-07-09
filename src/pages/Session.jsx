@@ -255,7 +255,7 @@ function Session() {
                     </div>
                 )}
 
-                {/* KHU VỰC CHI TIẾT PHIÊN (DARK TỐI GIẢN) */}
+                {/* KHU VỰC CHI TIẾT PHIÊN */}
                 {selectedSession && !loadingDetail && (
                     <div className="bg-slate-900 rounded-2xl border border-slate-800 shadow-2xl p-6 mt-8 animate-fadeIn transition-all">
                         

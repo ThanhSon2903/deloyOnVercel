@@ -12,7 +12,7 @@ function Register(){
         e.preventDefault();
         try {
             const res = await axios.post(
-                "http://localhost:8080/api/users/register",
+                "https://deloyonrailway-production.up.railway.app/api/users/register",
                 {
                     username,
                     email,
