@@ -25,7 +25,7 @@ function PostureStatus({ sessionId, isTracking }) {
       console.log(`[WebSocket] Khởi chạy lắng nghe Session #${sessionId}...`);
 
       stompClientRef.current = new Client({
-        webSocketFactory: () => new SockJS("http://localhost:8080/ws"),
+        webSocketFactory: () => new SockJS("https://deloyonrailway-production.up.railway.app/ws"),
         reconnectDelay: 5000,
         heartbeatIncoming: 4000,
         heartbeatOutgoing: 4000,
