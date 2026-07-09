@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, AlertTriangle, ChevronLeft, ChevronRight, Eye, RefreshCw } from 'lucide-react';
 
 const SessionsPage = () => {
-  // State quản lý dữ liệu từ Spring Boot Page object
   const [sessions, setSessions] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -21,8 +20,6 @@ const SessionsPage = () => {
         }
       });
       const apiResponse = await response.json();
-      
-      // Map đúng cấu trúc Page của Spring Boot
         if (pageData) {
             setSessions(pageData.content || []);
             setTotalPages(pageData.totalPages || 0);

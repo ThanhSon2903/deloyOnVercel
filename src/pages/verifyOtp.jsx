@@ -16,7 +16,7 @@ function VerifyOtp() {
         try {
             
             await axios.post(
-                "/users/verify-otp",
+                "https://deloyonrailway-production.up.railway.app/api/users/verify-otp",
                 { email, otp }
             );
             alert("Xác thực thành công");
