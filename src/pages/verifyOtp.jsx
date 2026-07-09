@@ -14,9 +14,9 @@ function VerifyOtp() {
     const handleVerify = async (e) => {
         e.preventDefault();
         try {
-            // Lưu ý: Đổi localhost thành domain Deploy của bạn nếu chạy production nhé!
+            
             await axios.post(
-                "http://localhost:8080/api/users/verify-otp",
+                "/users/verify-otp",
                 { email, otp }
             );
             alert("Xác thực thành công");
@@ -31,7 +31,7 @@ function VerifyOtp() {
     const handleResendOtp = async () => {
         try {
             await axios.post(
-                `https://deloyonrailway-production.up.railway.app/api/users/resent-otp/${email}`
+                `/users/resent-otp/${email}`
             );
             alert("Đã gửi lại OTP");
         } catch (error) {
