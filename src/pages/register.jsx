@@ -17,6 +17,7 @@ function Register() {
                 { username, email, password }
             );
             localStorage.setItem("verifyEmail", email);
+            alert(res.data.data)
             navigate("/verify-otp");
         } catch (error) {
             alert("Đăng ký thất bại");
