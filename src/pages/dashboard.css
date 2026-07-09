@@ -8,35 +8,28 @@ body,
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    background: #0b1120;
-    font-family: Inter, sans-serif;
+    background: #0f172a; /* Đổi sang Slate 900 sâu và sang hơn */
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
-.dashboard-layout {
-    min-height: 100vh;
-    background: #0b1120;
-}
-
+.dashboard-layout,
 .main-layout {
     min-height: 100vh;
-    background: #0b1120;
+    background: #0f172a !important;
 }
 
 /* ===========================
    Navbar
 =========================== */
-.header-icon:hover {
-  color: #ffffff !important;
-}
+
 .dashboard-navbar {
     height: 64px;
-    background: #111827 !important;
-    border-bottom: 1px solid #1f2937;
-
+    background: #1e293b !important; /* Slate 800 tạo độ nổi khối với nền */
+    border-bottom: 1px solid #334155; /* Border mượt hơn */
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     padding: 0 24px !important;
 }
 
@@ -49,48 +42,49 @@ body,
 .header-right {
     display: flex;
     align-items: center;
+    gap: 20px;
+}
+
+.header-icon {
+    color: #94a3b8 !important; /* Dải màu slate nhẹ nhã nhặn */
+    transition: all 0.3s ease;
+}
+
+.header-icon:hover {
+    color: #2dd4bf !important; /* Khi hover sẽ sáng màu xanh Mint đồng bộ */
+    transform: translateY(-1px);
 }
 
 .dashboard-title {
-    color: white !important;
+    color: #f8fafc !important; /* Trắng dịu mắt tinh tế */
     margin: 0 !important;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 .session-tag {
     display: flex;
     align-items: center;
     gap: 8px;
-
     padding: 6px 14px;
-
-    border-radius: 6px;
-
-    background: rgba(20,184,166,.15);
-
+    border-radius: 8px;
+    background: rgba(20, 184, 166, 0.1);
     color: #2dd4bf;
-
-    border: 1px solid rgba(45,212,191,.25);
-
+    border: 1px solid rgba(45, 212, 191, 0.2);
     font-size: 13px;
-
-    font-weight: 500;
+    font-weight: 600;
 }
 
 /* ===========================
-   Content
+   Content & Headers
 =========================== */
 
 .dashboard-content {
     padding: 24px;
-    background: #0b1120;
+    background: #0f172a;
     min-height: calc(100vh - 64px);
 }
-
-/* ===========================
-   Statistics
-=========================== */
 
 .stats-row {
     margin-bottom: 28px;
@@ -100,26 +94,21 @@ body,
     display: flex;
 }
 
-.stats-row .ant-col>* {
+.stats-row .ant-col > * {
     width: 100%;
 }
-
-/* ===========================
-   Section Header
-=========================== */
 
 .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     margin-bottom: 18px;
 }
 
 .section-title {
-    color: white;
+    color: #f8fafc;
     margin: 0;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
 }
 
@@ -127,116 +116,99 @@ body,
     display: flex;
     align-items: center;
     gap: 8px;
-
-    color: #10b981;
-
-    font-weight: 500;
+    color: #34d399;
+    font-weight: 600;
+    font-size: 14px;
+    background: rgba(52, 211, 153, 0.1);
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(52, 211, 153, 0.2);
 }
 
 /* ===========================
-   Live Monitoring
+   Cards & Layout Components
 =========================== */
 
 .live-monitoring-row {
     align-items: stretch;
 }
 
-.live-monitoring-row>.ant-col {
+.live-monitoring-row > .ant-col {
     display: flex;
 }
 
 .card-dark {
     width: 100%;
-
-    background: #111827 !important;
-
-    border: 1px solid #1f2937 !important;
-
-    border-radius: 14px !important;
-
+    background: #1e293b !important; /* Đồng màu với Navbar */
+    border: 1px solid #334155 !important;
+    border-radius: 16px !important; /* Bo góc mềm mại hơn */
     overflow: hidden;
+    transition: box-shadow 0.3s ease;
 }
 
 .card-dark .ant-card-body {
-    padding: 20px !important;
+    padding: 24px !important;
 }
 
 .custom-glow {
-    box-shadow: 0 6px 18px rgba(0,0,0,.35);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
 }
 
-/* ===========================
-   Posture Status
-=========================== */
+/* Đổ bóng nhẹ màu Teal cho khối đang active/live */
+.custom-glow:hover {
+    box-shadow: 0 10px 30px -5px rgba(20, 184, 166, 0.15);
+}
 
 .posture-status-card {
     width: 100%;
     height: 100%;
-
-    background: #111827;
-
-    border-radius: 14px;
-
-    border: 1px solid #1f2937;
-
-    padding: 20px;
-
+    background: #1e293b;
+    border-radius: 16px;
+    border: 1px solid #334155;
+    padding: 24px;
     box-sizing: border-box;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
 }
 
 /* ===========================
-   Animation
+   Animations & Indicators
 =========================== */
 
 .dot {
-    width: 10px;
-    height: 10px;
-
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-
-    background: #10b981;
+    background: #34d399;
+    box-shadow: 0 0 8px #34d399;
 }
 
 .visual-blink,
 .blink-icon {
-    animation: blink 1.2s infinite;
+    animation: blink 1.5s infinite ease-in-out;
 }
 
 @keyframes blink {
-
-    0% {
-        opacity: .3;
-    }
-
-    50% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: .3;
-    }
-
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
 }
 
 /* ===========================
-   Ant Design Override
+   Ant Design Overrides
 =========================== */
 
-.ant-layout {
-    background: #0b1120 !important;
-}
-
+.ant-layout,
 .ant-layout-content {
-    background: #0b1120 !important;
+    background: #0f172a !important;
 }
 
 .ant-card {
-    background: #111827;
-    color: white;
+    background: #1e293b;
+    color: #f8fafc;
+    border-radius: 16px;
 }
 
 .ant-card-bordered {
-    border: 1px solid #1f2937;
+    border: 1px solid #334155;
 }
 
 /* ===========================
@@ -244,33 +216,13 @@ body,
 =========================== */
 
 @media (max-width: 992px) {
-
-    .main-layout {
-        margin-left: 80px;
-    }
-
-    .dashboard-content {
-        padding: 18px;
-    }
-
+    .main-layout { margin-left: 80px; }
+    .dashboard-content { padding: 20px; }
 }
 
-@media (max-width:768px) {
-
-    .main-layout {
-        margin-left: 0;
-    }
-
-    .dashboard-navbar {
-        padding: 0 16px !important;
-    }
-
-    .dashboard-title {
-        font-size: 20px;
-    }
-
-    .session-tag {
-        display: none;
-    }
-
+@media (max-width: 768px) {
+    .main-layout { margin-left: 0; }
+    .dashboard-navbar { padding: 0 16px !important; }
+    .dashboard-title { font-size: 18px; }
+    .session-tag { display: none; }
 }

@@ -6,9 +6,9 @@ import {
   ThunderboltOutlined,
   UserOutlined,
   LogoutOutlined,
-  ReloadOutlined,       // Thêm icon Refresh
-  BellOutlined,         // Thêm icon Notification
-  SettingOutlined       // Thêm icon Settings
+  ReloadOutlined,       
+  BellOutlined,         
+  SettingOutlined       
 } from "@ant-design/icons";
 import StatsCard from "../components/dashboard/StatsCard";
 import LiveMonitoring from "../components/dashboard/LiveMonitoring";
@@ -84,20 +84,19 @@ function Dashboard() {
             </span>
           </div>
           
-          {/* Cập nhật khu vực góc phải bổ sung các icon chức năng */}
-          <div className="header-right" style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+          <div className="header-right">
             <ReloadOutlined 
               className="header-icon" 
               onClick={loadDashboard} 
-              style={{ fontSize: "18px", color: "#9ca3af", cursor: "pointer" }} 
+              style={{ fontSize: "18px", cursor: "pointer" }} 
             />
             <BellOutlined 
               className="header-icon" 
-              style={{ fontSize: "18px", color: "#9ca3af", cursor: "pointer" }} 
+              style={{ fontSize: "18px", cursor: "pointer" }} 
             />
             <SettingOutlined 
               className="header-icon" 
-              style={{ fontSize: "18px", color: "#9ca3af", cursor: "pointer" }} 
+              style={{ fontSize: "18px", cursor: "pointer" }} 
             />
             
             <Dropdown
@@ -111,6 +110,7 @@ function Dashboard() {
                 style={{
                   backgroundColor: "#14b8a6",
                   cursor: "pointer",
+                  boxShadow: "0 0 10px rgba(20, 184, 166, 0.4)"
                 }}
               />
             </Dropdown>
