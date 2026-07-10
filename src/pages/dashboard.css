@@ -1,228 +1,134 @@
-/* ===========================
-   Dashboard Layout
-=========================== */
-
-html,
-body,
-#root {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    background: #0f172a; /* Đổi sang Slate 900 sâu và sang hơn */
-    font-family: 'Inter', sans-serif;
-    -webkit-font-smoothing: antialiased;
+/* --- NỀN BACKROUND CYBERPUNK DARK --- */
+.dashboard-layout {
+  min-height: 100vh;
+  background: #0d111c !important;
 }
 
-.dashboard-layout,
 .main-layout {
-    min-height: 100vh;
-    background: #0f172a !important;
+  background: radial-gradient(circle at 50% 0%, #161c2e, #090d16) !important;
+  padding: 0 24px 24px 24px;
 }
 
-/* ===========================
-   Navbar
-=========================== */
-
+/* --- THANH NAVBAR HIỆN ĐẠI --- */
 .dashboard-navbar {
-    height: 64px;
-    background: #1e293b !important; /* Slate 800 tạo độ nổi khối với nền */
-    border-bottom: 1px solid #334155; /* Border mượt hơn */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 24px !important;
-}
-
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.header-icon {
-    color: #94a3b8 !important; /* Dải màu slate nhẹ nhã nhặn */
-    transition: all 0.3s ease;
-}
-
-.header-icon:hover {
-    color: #2dd4bf !important; /* Khi hover sẽ sáng màu xanh Mint đồng bộ */
-    transform: translateY(-1px);
+  background: rgba(13, 17, 28, 0.8) !important;
+  backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 0 24px !important;
+  height: 70px !important;
 }
 
 .dashboard-title {
-    color: #f8fafc !important; /* Trắng dịu mắt tinh tế */
-    margin: 0 !important;
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+  font-weight: 800 !important;
+  font-size: 24px !important;
+  margin: 0 !important;
+  background: linear-gradient(135deg, #06b6d4, #3b82f6, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
+/* --- SỬA KHUYẾT ĐIỂM: NÚT NO ACTIVE SESSION BO TRÒN NHỎ GỌN --- */
 .session-tag {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    border-radius: 8px;
-    background: rgba(20, 184, 166, 0.1);
-    color: #2dd4bf;
-    border: 1px solid rgba(45, 212, 191, 0.2);
-    font-size: 13px;
-    font-weight: 600;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-left: 16px !important;
+  
+  /* Reset lại chiều cao, không cho ăn theo Navbar */
+  height: auto !important; 
+  line-height: 1 !important;
+  padding: 6px 12px !important; 
+  
+  /* Bo góc nhỏ, tinh tế đúng yêu cầu */
+  border-radius: 6px !important; 
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px;
+  vertical-align: middle !important;
 }
 
-/* ===========================
-   Content & Headers
-=========================== */
-
-.dashboard-content {
-    padding: 24px;
-    background: #0f172a;
-    min-height: calc(100vh - 64px);
+/* Màu khi OFFLINE (Chưa có Session) - Màu đỏ Neon mờ sang trọng */
+.session-tag.session-inactive {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #f87171 !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.15) !important;
 }
 
-.stats-row {
-    margin-bottom: 28px;
+/* Màu khi ACTIVE - Màu xanh ngọc phát sáng */
+.session-tag.session-active {
+  background: rgba(20, 184, 166, 0.1) !important;
+  color: #2dd4bf !important;
+  border: 1px solid rgba(20, 184, 166, 0.4) !important;
+  box-shadow: 0 0 12px rgba(20, 184, 166, 0.3) !important;
 }
 
-.stats-row .ant-col {
-    display: flex;
+/* --- ICONS NAVBAR HOVER PHÁT SÁNG --- */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-.stats-row .ant-col > * {
-    width: 100%;
+.header-icon {
+  color: #9ca3af !important;
+  transition: all 0.3s ease !important;
 }
 
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 18px;
+.header-icon:hover {
+  color: #06b6d4 !important;
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 8px #06b6d4);
 }
 
-.section-title {
-    color: #f8fafc;
-    margin: 0;
-    font-size: 20px;
-    font-weight: 700;
+/* --- HIỆU ỨNG MÀU MÈ CHO CÁC CARD/BOX --- */
+/* Ép tất cả các thẻ Ant-Card và Card-Dark đổi màu neon */
+.ant-card, .card-dark, .live-monitoring-row .ant-card {
+  border-radius: 16px !important; /* Bo góc card mượt mà */
+  background: rgba(22, 28, 45, 0.7) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-.live-indicator {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #34d399;
-    font-weight: 600;
-    font-size: 14px;
-    background: rgba(52, 211, 153, 0.1);
-    padding: 4px 12px;
-    border-radius: 20px;
-    border: 1px solid rgba(52, 211, 153, 0.2);
+/* Di chuột vào Card bất kỳ sẽ phát sáng viền xanh tím cực đẹp */
+.ant-card:hover, .card-dark:hover {
+  border-color: rgba(99, 102, 241, 0.4) !important; 
+  box-shadow: 0 0 25px rgba(99, 102, 241, 0.25) !important;
+  transform: translateY(-3px);
 }
 
-/* ===========================
-   Cards & Layout Components
-=========================== */
-
-.live-monitoring-row {
-    align-items: stretch;
-}
-
-.live-monitoring-row > .ant-col {
-    display: flex;
-}
-
-.card-dark {
-    width: 100%;
-    background: #1e293b !important; /* Đồng màu với Navbar */
-    border: 1px solid #334155 !important;
-    border-radius: 16px !important; /* Bo góc mềm mại hơn */
-    overflow: hidden;
-    transition: box-shadow 0.3s ease;
-}
-
-.card-dark .ant-card-body {
-    padding: 24px !important;
-}
-
-.custom-glow {
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
-}
-
-/* Đổ bóng nhẹ màu Teal cho khối đang active/live */
+/* Khung Live Monitoring to được ưu tiên phát sáng mạnh hơn */
 .custom-glow:hover {
-    box-shadow: 0 10px 30px -5px rgba(20, 184, 166, 0.15);
+  border-color: rgba(6, 182, 212, 0.5) !important;
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.3) !important;
 }
 
-.posture-status-card {
-    width: 100%;
-    height: 100%;
-    background: #1e293b;
-    border-radius: 16px;
-    border: 1px solid #334155;
-    padding: 24px;
-    box-sizing: border-box;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+/* Tiêu đề các mục */
+.section-title {
+  color: #f3f4f6 !important;
+  font-weight: 700 !important;
+  font-size: 18px !important;
+  letter-spacing: 0.5px;
 }
 
-/* ===========================
-   Animations & Indicators
-=========================== */
-
-.dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #34d399;
-    box-shadow: 0 0 8px #34d399;
+/* Dot nhấp nháy khi Live */
+.visual-blink {
+  width: 8px;
+  height: 8px;
+  background-color: #2dd4bf;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 10px #2dd4bf;
+  animation: pulse-glow 1.5s infinite ease-in-out;
 }
 
-.visual-blink,
-.blink-icon {
-    animation: blink 1.5s infinite ease-in-out;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 1; }
-}
-
-/* ===========================
-   Ant Design Overrides
-=========================== */
-
-.ant-layout,
-.ant-layout-content {
-    background: #0f172a !important;
-}
-
-.ant-card {
-    background: #1e293b;
-    color: #f8fafc;
-    border-radius: 16px;
-}
-
-.ant-card-bordered {
-    border: 1px solid #334155;
-}
-
-/* ===========================
-   Responsive
-=========================== */
-
-@media (max-width: 992px) {
-    .main-layout { margin-left: 80px; }
-    .dashboard-content { padding: 20px; }
-}
-
-@media (max-width: 768px) {
-    .main-layout { margin-left: 0; }
-    .dashboard-navbar { padding: 0 16px !important; }
-    .dashboard-title { font-size: 18px; }
-    .session-tag { display: none; }
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.1); filter: drop-shadow(0 0 6px #2dd4bf); }
 }
