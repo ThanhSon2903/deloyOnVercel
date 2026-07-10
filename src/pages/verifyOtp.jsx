@@ -31,7 +31,7 @@ function VerifyOtp() {
     const handleResendOtp = async () => {
         try {
             await axios.post(
-                `/users/resent-otp/${email}`
+                `https://deloyonrailway-production.up.railway.app/api/users/resent-otp/${email}`
             );
             alert("Đã gửi lại OTP");
         } catch (error) {
