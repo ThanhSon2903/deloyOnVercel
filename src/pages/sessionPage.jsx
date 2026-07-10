@@ -19,7 +19,7 @@ const SessionsPage = () => {
           'Authorization': `Bearer ${localStorage.getItem('token')}` // Nếu bạn dùng JWT
         }
       });
-      const apiResponse = await response.json();
+      const apiResponse = await response.json(); // parse dữ thành object từ json
         if (pageData) {
             setSessions(pageData.content || []);
             setTotalPages(pageData.totalPages || 0);

@@ -78,8 +78,8 @@ function Dashboard() {
         <Header className="dashboard-navbar">
           <div className="header-left">
             <h1 className="dashboard-title">Dashboard</h1>
-            <span className="session-tag">
-              <ThunderboltOutlined className="blink-icon" /> 
+            <span className={`session-tag ${isLive ? "session-active" : "session-inactive"}`}>
+              <ThunderboltOutlined className={isLive ? "blink-icon" : ""} /> 
               {isLive ? `Session #${currentSessionId} Active` : "No Active Session"}
             </span>
           </div>
