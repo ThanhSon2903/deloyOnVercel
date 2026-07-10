@@ -118,32 +118,7 @@ function Dashboard() {
         </Header>
 
         <Content className="dashboard-content">
-          {/* Stats Section */}
-          <Row gutter={[16, 16]} className="stats-row">
-            <Col xs={24} sm={12} lg={6}>
-              <StatsCard title="Total Sessions" value={dashboard.totalSessions} changeType="positive" />
-            </Col>
-            <Col xs={24} sm={12} lg={6}>
-              <StatsCard title="Bad Posture Duration" value={`${dashboard.badPostureDuration} mins`} changeType="positive" />
-            </Col>
-            <Col xs={24} sm={12} lg={6}>
-              <StatsCard title="Total Alerts" value={dashboard.totalAlerts} subtitle="Today" icon="warning" />
-            </Col>
-            <Col xs={24} sm={12} lg={6}>
-              <StatsCard title="Notifications" value={dashboard.totalNotifications} />
-            </Col>
-          </Row>
-
-          {/* Live Monitoring Section */}
-          <div className="section-header">
-            <h2 className="section-title">Live Monitoring</h2>
-            {isLive && (
-              <div className="live-indicator">
-                <span className="dot visual-blink"></span> Streaming Live
-              </div>
-            )}
-          </div>
-
+          {/* Stats Section - 4 ô thống kê được cố định độ cao bằng nhau */}
           <Row gutter={[16, 16]} className="stats-row equal-height-row">
             <Col xs={24} sm={12} lg={6} className="equal-height-col">
               <StatsCard title="Total Sessions" value={dashboard.totalSessions} changeType="positive" />
@@ -156,6 +131,32 @@ function Dashboard() {
             </Col>
             <Col xs={24} sm={12} lg={6} className="equal-height-col">
               <StatsCard title="Notifications" value={dashboard.totalNotifications} />
+            </Col>
+          </Row>
+
+          {/* Live Monitoring Section - Đã khôi phục lại camera & status tracking */}
+          <div className="section-header">
+            <h2 className="section-title">Live Monitoring</h2>
+            {isLive && (
+              <div className="live-indicator">
+                <span className="dot visual-blink"></span> Streaming Live
+              </div>
+            )}
+          </div>
+
+          <Row gutter={[16, 16]} className="live-monitoring-row">
+            <Col xs={24} lg={16}>
+              <Card className="card-dark custom-glow" bordered={false}>
+                <LiveMonitoring 
+                  isTracking={isLive} 
+                  sessionId={currentSessionId} 
+                  onStart={handleStartTracking} 
+                  onEnd={handleEndTracking} 
+                />
+              </Card>
+            </Col>
+            <Col xs={24} lg={8}>
+              <PostureStatus sessionId={currentSessionId} isTracking={isLive} />
             </Col>
           </Row>
         </Content>
