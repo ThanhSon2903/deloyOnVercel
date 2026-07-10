@@ -144,19 +144,18 @@ function Dashboard() {
             )}
           </div>
 
-          <Row gutter={[16, 16]} className="live-monitoring-row">
-            <Col xs={24} lg={16}>
-              <Card className="card-dark custom-glow" bordered={false}>
-                <LiveMonitoring 
-                  isTracking={isLive} 
-                  sessionId={currentSessionId} 
-                  onStart={handleStartTracking} 
-                  onEnd={handleEndTracking} 
-                />
-              </Card>
+          <Row gutter={[16, 16]} className="stats-row equal-height-row">
+            <Col xs={24} sm={12} lg={6} className="equal-height-col">
+              <StatsCard title="Total Sessions" value={dashboard.totalSessions} changeType="positive" />
             </Col>
-            <Col xs={24} lg={8}>
-              <PostureStatus sessionId={currentSessionId} isTracking={isLive} />
+            <Col xs={24} sm={12} lg={6} className="equal-height-col">
+              <StatsCard title="Bad Posture Duration" value={`${dashboard.badPostureDuration} mins`} changeType="positive" />
+            </Col>
+            <Col xs={24} sm={12} lg={6} className="equal-height-col">
+              <StatsCard title="Total Alerts" value={dashboard.totalAlerts} subtitle="Today" icon="warning" />
+            </Col>
+            <Col xs={24} sm={12} lg={6} className="equal-height-col">
+              <StatsCard title="Notifications" value={dashboard.totalNotifications} />
             </Col>
           </Row>
         </Content>
