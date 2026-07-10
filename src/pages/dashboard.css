@@ -133,3 +133,23 @@
   0%, 100% { opacity: 0.6; transform: scale(0.9); }
   50% { opacity: 1; transform: scale(1.1); filter: drop-shadow(0 0 6px #2dd4bf); }
 }
+
+/* ===== FIX: 4 StatsCard luôn bằng chiều cao ===== */
+.equal-height-row {
+  display: flex;
+}
+
+.equal-height-col {
+  display: flex;
+}
+
+.equal-height-col .stats-card {
+  width: 100%;
+  height: 100%;
+}
+
+.equal-height-col .stats-card .ant-card-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}

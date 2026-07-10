@@ -3,6 +3,7 @@
   border: 1px solid #2a2a2a;
   border-radius: 8px;
   transition: all 0.3s ease;
+  height: 100%;
 }
 
 .stats-card:hover {
@@ -12,6 +13,9 @@
 
 .stats-card .ant-card-body {
   padding: 16px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .stats-card-header {
@@ -45,7 +49,9 @@
   margin-bottom: 8px;
 }
 
+/* Đẩy phần change xuống đáy card */
 .stats-change {
+  margin-top: auto;
   font-size: 12px;
   display: flex;
   align-items: center;
