@@ -33,7 +33,7 @@ function Login() {
         width: "100%",
         padding: "12px 16px",
         marginBottom: "20px",
-        backgroundColor: "rgba(255, 255, 255, 0.9)", // Ô nhập sáng rõ
+        backgroundColor: "rgba(255, 255, 255)", // Ô nhập sáng rõ
         border: "1px solid #e0e0e0",
         borderRadius: "10px",
         color: "#222",
