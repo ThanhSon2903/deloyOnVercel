@@ -47,7 +47,7 @@ function Register() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundImage: 'url("https://media.utt.edu.vn/uploads/tai-lieu-tuyen-sinh/HN/Co%20so%20HN.jpghttps://www.google.com/search?q=utt+quang+c%E1%BA%A3nh&sca_esv=77e44e7688afd311&rlz=1C1GCEA_enVN1192VN1192&udm=2&biw=1366&bih=599&sxsrf=APpeQnuhnjQRD-0-Eie6IDZ4igmSUMk4HA%3A1786894321733&ei=8deBaqioLKLIvr0Ppe3piQQ&ved=0ahUKEwjo5LCKvKWWAxUipK8BHaV2OkEQ4dUDCBE&uact=5&oq=utt+quang+c%E1%BA%A3nh&gs_lp=Egtnd3Mtd2l6LWltZyIQdXR0IHF1YW5nIGPhuqNuaEjVHlDwBViEHnAEeACQAQGYAU-gAd8KqgECMTm4AQPIAQD4AQGYAg2gAr4HwgIFEAAYgATCAgQQABgewgIGEAAYCBgewgIHECMYyQIYJ8ICChAAGIAEGIoFGEPCAggQABiABBixA8ICCxAAGIAEGLEDGIMBwgIGEAAYBRgemAMAiAYBkgcCMTOgB9U7sgcCMTK4B7gHwgcGMC4yLjExyAc9gAgB&sclient=gws-wiz-img#sv=CAMSURoyKhBlLXIxemRrdk94bGlNV1hNMg5yMXpka3ZPeGxpTVdYTToOV2I1SUhqaVR0enFmQ00gBCoXCgFzEhBlLXIxemRrdk94bGlNV1hNGAEwARgHIOPIoYQFSggQARgBIAEoAQ")',
+                backgroundImage: 'url("C:\Users\Admin\Desktop\DATN-FE\posture-tracking-frontend\src\assets\giang-duong-utt.jpg")',
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
