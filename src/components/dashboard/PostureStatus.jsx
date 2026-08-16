@@ -78,7 +78,7 @@ function PostureStatus({ sessionId, isTracking }) {
 
     return () => {
       if (stompClientRef.current) {
-        console.log("[WebSocket] Đóng cổng kết nối an toàn.");
+        console.log("Đóng cổng kết nối an toàn.");
         stompClientRef.current.deactivate();
       }
     };
@@ -115,7 +115,7 @@ function PostureStatus({ sessionId, isTracking }) {
           </div>
         </div>
 
-        <div className="metrics-section">
+        <div className="metrics-szsection">
           <div className="metric-item">
             <span className="metric-label">Neck Angle</span>
             <strong className="metric-value">{metrics.neckAngle}°</strong>
@@ -139,3 +139,4 @@ function PostureStatus({ sessionId, isTracking }) {
 }
 
 export default PostureStatus;
+
