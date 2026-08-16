@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom"; // Thêm Link để chuyển hướng
 import axiosClient from "../api/axiosClient";
+import uttLogo from "../assets/logo.png"; // Đường dẫn tới file logo của bạn
 
 function Session() {
     const [sessions, setSessions] = useState([]);
@@ -127,14 +129,17 @@ function Session() {
             <div className="max-w-7xl mx-auto">
 
                 {/* Header Section */}
+                {/* Header Section */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+                    {/* LOGO UTT BẤM VỀ DASHBOARD */}
                     <div>
-                        <h3 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
-                            <span>📋</span> Tracking session history
-                        </h3>
-                        <p className="text-sm text-slate-400 mt-1">
-                            Review and manage your posture monitoring sessions
-                        </p>
+                        <Link to="/dashboard" className="inline-block cursor-pointer transition-transform hover:scale-105">
+                            <img 
+                                src={uttLogo} 
+                                alt="UTT Logo" 
+                                className="h-28 w-auto object-contain rounded-xl p-1 bg-slate-900 border border-slate-800 shadow-lg" 
+                            />
+                        </Link>
                     </div>
 
                     <div className="bg-slate-900 border border-slate-800 rounded-2xl px-6 py-4 shadow-xl flex items-center gap-4">
@@ -335,7 +340,6 @@ function Session() {
                                                 <td className="px-4 py-3 whitespace-nowrap text-xs text-slate-400">
                                                     {formatDate(posture.createdAt)}
                                                 </td>
-                                                {/* Loại bỏ Badge sặc sỡ, dùng chữ đơn giản tiệp màu nền tối */}
                                                 <td className="px-4 py-3 font-medium text-slate-300">
                                                     {posture.status === "GOOD_POSTURE" && "GOOD_POSTURE"}
                                                     {posture.status === "WARNING_POSTURE" && "WARNING_POSTURE"}
@@ -350,7 +354,6 @@ function Session() {
                                                 <td className="px-4 py-3 text-center font-mono text-slate-300 text-xs">
                                                     {formatAngle(posture.shouterRatio)}
                                                 </td>
-                                               
                                             </tr>
                                         ))
                                     ) : (
@@ -364,7 +367,7 @@ function Session() {
                             </table>
                         </div>
 
-                        {/* ĐIỀU HƯỚNG PHÂN TRANG (PAGINATION TỐI) */}
+                        {/* ĐIỀU HƯỚNG PHÂN TRANG */}
                         {totalPages > 1 && (
                             <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-800/60">
                                 <button

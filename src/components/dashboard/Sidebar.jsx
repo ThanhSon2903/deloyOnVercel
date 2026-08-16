@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Layout, Menu, Button } from "antd";
+import uttLogo from "../../assets/logo.png";
 import {
   HomeOutlined,
   UnorderedListOutlined,
@@ -11,7 +12,6 @@ import "./Sidebar.css";
 
 function Sidebar() {
   const navigate = useNavigate();
-  // State quản lý việc thụt ra thụt vào
   const [collapsed, setCollapsed] = useState(false);
 
   const menuItems = [
@@ -32,19 +32,21 @@ function Sidebar() {
   return (
     <Layout.Sider 
       className="sidebar-custom" 
-      width={240} // Tăng nhẹ width để chữ đứng thoải mái
-      collapsedWidth={80} // Chiều rộng khi thụt vào
+      width={240}
+      collapsedWidth={80}
       collapsible 
       collapsed={collapsed}
       trigger={null}
     >
       <div className="sidebar-header-wrapper">
         <div className="sidebar-logo">
-          {/* Ẩn chữ logo khi thu nhỏ để không bị vỡ giao diện */}
-          {!collapsed && <span className="logo-text">PostureAI</span>}
+          <img 
+            src={uttLogo} 
+            alt="UTT Logo" 
+            className="utt-logo-img"
+          />
         </div>
         
-        {/* Nút trigger thụt ra thụt vào cực tinh tế */}
         <Button
           type="text"
           icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -54,7 +56,7 @@ function Sidebar() {
       </div>
 
       <Menu
-        theme="dark"
+        theme="light"
         mode="inline"
         defaultSelectedKeys={["dashboard"]}
         items={menuItems}

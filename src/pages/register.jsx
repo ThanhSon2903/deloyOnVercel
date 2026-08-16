@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import uttBg from "../assets/giang-duong-utt.jpg";
 
 function Register() {
     const [username, setUserName] = useState("");
@@ -25,15 +26,15 @@ function Register() {
         }
     };
 
-    // Style chung cho các ô Input theo style mờ tối đan xen
+    // Style ô input nền trắng mờ với viền xám nhẹ cho theme sáng
     const inputStyle = {
         width: "100%",
         padding: "12px 16px",
         marginBottom: "20px",
-        backgroundColor: "rgba(0, 0, 0, 0.4)", // Nền tối trong suốt
-        border: "1px solid rgba(255, 255, 255, 0.15)", // Viền sáng nhẹ
+        backgroundColor: "rgba(255, 255, 255, 0.9)", // Ô nhập sáng rõ
+        border: "1px solid #e0e0e0",
         borderRadius: "10px",
-        color: "#fff",
+        color: "#222",
         fontSize: "14px",
         outline: "none",
         transition: "all 0.3s ease",
@@ -44,10 +45,11 @@ function Register() {
         <div
             style={{
                 height: "100vh",
+                width: "100vw",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundImage: 'url("C:\Users\Admin\Desktop\DATN-FE\posture-tracking-frontend\src\assets\giang-duong-utt.jpg")',
+                backgroundImage: `url(${uttBg})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
@@ -55,35 +57,22 @@ function Register() {
                 position: "relative"
             }}
         >
-            {/* Lớp phủ dải màu tối nhẹ nhàng */}
-            <div style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                backgroundColor: "rgba(10, 15, 30, 0.45)", // Phủ lớp xanh đen nhẹ tăng độ tương phản
-                backdropFilter: "blur(2px)"
-            }}></div>
-
-            {/* Form đăng ký phong cách Kính Mờ (Glassmorphism) */}
+            {/* Form đăng ký nền màu rgba(255, 255, 255, 0.85) sáng rõ */}
             <form
                 onSubmit={handleRegister}
                 style={{
                     width: "400px",
                     padding: "40px",
-                    backgroundColor: "rgba(20, 20, 25, 0.65)", // Nền kính mờ
-                    backdropFilter: "blur(16px)", // Hiệu ứng làm mờ nền phía sau
-                    WebkitBackdropFilter: "blur(16px)",
-                    border: "1px solid rgba(255, 255, 255, 0.12)",
+                    backgroundColor: "rgba(255, 255, 255, 0.85)", // Nền trắng sáng mờ theo yêu cầu
+                    border: "1px solid rgba(255, 255, 255, 0.6)",
                     borderRadius: "20px",
-                    boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)",
+                    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)", // Đổ bóng nhẹ nhàng
                     boxSizing: "border-box",
                     zIndex: 1
                 }}
             >
                 <h2 style={{ 
-                    color: "#ffffff", 
+                    color: "#1a1a1a", 
                     margin: "0 0 8px 0", 
                     fontSize: "28px", 
                     fontWeight: "700",
@@ -94,17 +83,17 @@ function Register() {
                 </h2>
                 
                 <p style={{ 
-                    color: "rgba(255, 255, 255, 0.7)", 
+                    color: "#666666", 
                     fontSize: "14px", 
                     textAlign: "center", 
                     marginBottom: "32px",
                     marginTop: "0"
                 }}>
-                    Chào mừng bạn đến với hệ thống UTT
+                    Chào mừng bạn đến với UTT
                 </p>
 
                 <div>
-                    <label style={{ color: "rgba(255, 255, 255, 0.85)", fontSize: "13px", fontWeight: "500", display: "block", marginBottom: "6px" }}>
+                    <label style={{ color: "#333333", fontSize: "13px", fontWeight: "600", display: "block", marginBottom: "6px" }}>
                         Họ và tên
                     </label>
                     <input
@@ -115,18 +104,18 @@ function Register() {
                         onChange={(e) => setUserName(e.target.value)}
                         style={inputStyle}
                         onFocus={(e) => {
-                            e.target.style.borderColor = "#ff7e29"; // Viền màu cam UTT khi focus
-                            e.target.style.boxShadow = "0 0 8px rgba(255, 126, 41, 0.4)";
+                            e.target.style.borderColor = "#ff6a00";
+                            e.target.style.boxShadow = "0 0 0 3px rgba(255, 106, 0, 0.15)";
                         }}
                         onBlur={(e) => {
-                            e.target.style.borderColor = "rgba(255, 255, 255, 0.15)";
+                            e.target.style.borderColor = "#e0e0e0";
                             e.target.style.boxShadow = "none";
                         }}
                     />
                 </div>
 
                 <div>
-                    <label style={{ color: "rgba(255, 255, 255, 0.85)", fontSize: "13px", fontWeight: "500", display: "block", marginBottom: "6px" }}>
+                    <label style={{ color: "#333333", fontSize: "13px", fontWeight: "600", display: "block", marginBottom: "6px" }}>
                         Địa chỉ Email
                     </label>
                     <input
@@ -137,18 +126,18 @@ function Register() {
                         onChange={(e) => setEmail(e.target.value)}
                         style={inputStyle}
                         onFocus={(e) => {
-                            e.target.style.borderColor = "#ff7e29";
-                            e.target.style.boxShadow = "0 0 8px rgba(255, 126, 41, 0.4)";
+                            e.target.style.borderColor = "#ff6a00";
+                            e.target.style.boxShadow = "0 0 0 3px rgba(255, 106, 0, 0.15)";
                         }}
                         onBlur={(e) => {
-                            e.target.style.borderColor = "rgba(255, 255, 255, 0.15)";
+                            e.target.style.borderColor = "#e0e0e0";
                             e.target.style.boxShadow = "none";
                         }}
                     />
                 </div>
 
                 <div>
-                    <label style={{ color: "rgba(255, 255, 255, 0.85)", fontSize: "13px", fontWeight: "500", display: "block", marginBottom: "6px" }}>
+                    <label style={{ color: "#333333", fontSize: "13px", fontWeight: "600", display: "block", marginBottom: "6px" }}>
                         Mật khẩu
                     </label>
                     <input
@@ -159,17 +148,17 @@ function Register() {
                         onChange={(e) => setPassword(e.target.value)}
                         style={inputStyle}
                         onFocus={(e) => {
-                            e.target.style.borderColor = "#ff7e29";
-                            e.target.style.boxShadow = "0 0 8px rgba(255, 126, 41, 0.4)";
+                            e.target.style.borderColor = "#ff6a00";
+                            e.target.style.boxShadow = "0 0 0 3px rgba(255, 106, 0, 0.15)";
                         }}
                         onBlur={(e) => {
-                            e.target.style.borderColor = "rgba(255, 255, 255, 0.15)";
+                            e.target.style.borderColor = "#e0e0e0";
                             e.target.style.boxShadow = "none";
                         }}
                     />
                 </div>
 
-                {/* Nút Đăng ký với màu Cam Gradient nổi bật hài hòa với màu trường UTT */}
+                {/* Nút màu cam UTT sang trọng */}
                 <button
                     type="submit"
                     onMouseEnter={() => setIsHovered(true)}
@@ -178,8 +167,8 @@ function Register() {
                         width: "100%",
                         padding: "13px",
                         background: isHovered 
-                            ? "linear-gradient(135deg, #e65c00, #f9d423)" 
-                            : "linear-gradient(135deg, #ff6a00, #ee0979)", // Gradient Cam - Hồng Dâu hiện đại
+                            ? "linear-gradient(135deg, #e65c00, #ff8c00)" 
+                            : "linear-gradient(135deg, #ff6a00, #ff8c00)",
                         border: "none",
                         borderRadius: "10px",
                         color: "#fff",
@@ -187,7 +176,7 @@ function Register() {
                         fontWeight: "600",
                         cursor: "pointer",
                         transition: "all 0.3s ease",
-                        boxShadow: isHovered ? "0 6px 20px rgba(255, 106, 0, 0.5)" : "0 4px 15px rgba(255, 106, 0, 0.3)",
+                        boxShadow: isHovered ? "0 6px 20px rgba(255, 106, 0, 0.4)" : "0 4px 12px rgba(255, 106, 0, 0.25)",
                         marginTop: "10px"
                     }}
                 >
@@ -195,7 +184,7 @@ function Register() {
                 </button>
 
                 <p style={{ 
-                    color: "rgba(255, 255, 255, 0.7)", 
+                    color: "#555555", 
                     fontSize: "14px", 
                     textAlign: "center", 
                     marginTop: "24px",
@@ -203,13 +192,13 @@ function Register() {
                 }}>
                     Đã có tài khoản?{" "}
                     <Link to="/login" style={{ 
-                        color: "#ff9d5c", 
+                        color: "#ff6a00", 
                         textDecoration: "none",
                         fontWeight: "600",
                         transition: "color 0.2s"
                     }}
-                    onMouseEnter={(e) => e.target.style.color = "#ffffff"}
-                    onMouseLeave={(e) => e.target.style.color = "#ff9d5c"}
+                    onMouseEnter={(e) => e.target.style.color = "#e65c00"}
+                    onMouseLeave={(e) => e.target.style.color = "#ff6a00"}
                     >
                         Đăng nhập
                     </Link>
