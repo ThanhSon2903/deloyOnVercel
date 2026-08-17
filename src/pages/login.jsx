@@ -93,7 +93,7 @@ function Login() {
                     marginBottom: "32px",
                     marginTop: "0"
                 }}>
-                    Chào mừng bạn quay trở lại!
+                    Chào mừng bạn quay trở lại
                 </p>
 
                 <div>
