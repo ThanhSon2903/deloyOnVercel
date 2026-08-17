@@ -33,14 +33,16 @@ function Login() {
         width: "100%",
         padding: "12px 16px",
         marginBottom: "20px",
-        backgroundColor: "rgba(255, 255, 255)", // Ô nhập sáng rõ
+        backgroundColor: "rgba(255, 255, 255,0.6)", // Ô nhập sáng rõ
         border: "1px solid #e0e0e0",
         borderRadius: "10px",
         color: "#222",
         fontSize: "14px",
         outline: "none",
         transition: "all 0.3s ease",
-        boxSizing: "border-box"
+        boxSizing: "border-box",
+        boxShadow: "0 2px 6px rgba(0, 0, 0, 0.03)",
+        WebkitBoxShadow: "0 0 0px 1000px rgba(255, 255, 255, 0.85) inset"
     };
 
     return (
